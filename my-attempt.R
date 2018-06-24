@@ -13,26 +13,64 @@ print(profitPerMonth)
 
 # profit after tax for each month
 # 30% tax rate
-
+profitPerMonth <- revenue - expenses
+taxPerMonth <- profitPerMonth * .3
+profitAfterTax <- profitPerMonth - taxPerMonth
+profitAfterTax <- profitAfterTax / 1000
+profitAfterTax <- round(profitAfterTax)
+print(profitAfterTax)
 
 # profit margin for each month
 # profit after tax / revenue
+profitPerMonth <- revenue - expenses
+taxPerMonth <- profitPerMonth * .3
+profitAfterTax <- profitPerMonth - taxPerMonth
+profitMargin <- profitAfterTax / revenue
+profitMargin <- profitMargin * 100
+profitMargin <- round(profitMargin)
+print(profitMargin)
 
 
-# good months
-# where the profit after tax was greater than
-# the mean for the year
+# Mean calculation
+  # Requires profit after tax
+  profitPerMonth <- revenue - expenses
+  taxPerMonth <- profitPerMonth * .3
+  profitAfterTax <- profitPerMonth - taxPerMonth
+  # Actual mean calculation
+  mean <- mean(profitAfterTax)
+  print(mean)
 
 
-# bad months
-# where the profit after tax was less than
-# the mean for the year
-
+# good months and bad months
+# where the profit after tax was greater than, or
+# less than the mean for the year
+goodMonths <- profitAfterTax > mean
+goodMonths
+monthLogic <- rep(NA, length(goodMonths))
+monthLogic
+for(i in 1:length(goodMonths)) {
+  if(goodMonths[i] == TRUE) {
+    monthLogic[i] <- "Good Month"
+  } else {
+    monthLogic[i] <- "Bad Month"
+  }
+}
+print(monthLogic)
 
 # the best month
 # where the profit after tax was max for the year
-
+bestMonth <- max(profitAfterTax)
+for(i in 1:length(profitAfterTax)) {
+  if(profitAfterTax[i] == bestMonth) {
+    print(paste("Month", i, "Is the best month"))
+  }
+}
 
 # the worst month
 # where the profit after tax was min for the year
-
+worstMonth <- min(profitAfterTax)
+for(i in 1:length(profitAfterTax)) {
+  if(profitAfterTax[i] == worstMonth) {
+    print(paste("Month", i, "Is the worst month"))
+  }
+}
